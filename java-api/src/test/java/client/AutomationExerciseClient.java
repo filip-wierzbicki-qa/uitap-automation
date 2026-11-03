@@ -8,6 +8,8 @@ import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class AutomationExerciseClient {
@@ -51,5 +53,19 @@ public class AutomationExerciseClient {
         }
         return request.post("/verifyLogin");
     }
+
+    public Response createAccount(Map<String, String> account) {
+        return given(spec)
+                .formParams(account)
+                .post("/createAccount");
+    }
+
+    public Response deleteAccount(String email, String password) {
+        return given(spec)
+                .formParam("email", email)
+                .formParam("password", password)
+                .delete("/deleteAccount");
+    }
+
 
 }
