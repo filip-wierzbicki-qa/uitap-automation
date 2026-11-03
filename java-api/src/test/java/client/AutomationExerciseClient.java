@@ -32,4 +32,24 @@ public class AutomationExerciseClient {
     public Response postProducts() {
         return given(spec).post("/productsList");
     }
+
+    public Response searchProducts(String term){
+        RequestSpecification request = given(spec);
+        if (term != null) {
+            request.formParam("search_product", term);
+        }
+        return request.post("/searchProduct");
+    }
+
+    public Response verifyLogin(String email, String password){
+        RequestSpecification request = given(spec);
+        if (email != null){
+            request.formParam("email", email);
+        }
+        if (password != null){
+            request.formParam("password", password);
+        }
+        return request.post("/verifyLogin");
+    }
+
 }
